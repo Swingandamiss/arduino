@@ -1,0 +1,45 @@
+#include <SoftwareSerial.h>
+SoftwareSerial BTSerial(0,1);
+void setup() {  
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);  
+  Serial.begin(9600);
+  BTSerial.begin(9600);                                                                                             
+}
+void loop() {
+  if (BTSerial.available()) { 
+    String command = BTSerial.readString();
+    if (command == "forward") {
+      digitalWrite(5,HIGH);
+      digitalWrite(6,LOW);
+      digitalWrite(8,LOW);
+      digitalWrite(7,HIGH);
+      delay(3000);
+    } else if (command == "backward") {
+      digitalWrite(5,LOW);
+      digitalWrite(6,HIGH);
+      digitalWrite(7,LOW);
+      digitalWrite(8,HIGH);
+      delay(10000);
+    } else if (command == "right"){
+      digitalWrite(5,HIGH);
+      digitalWrite(6,LOW);
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+      delay(390);
+    } else if (command == "left"){
+      digitalWrite(5,LOW);
+      digitalWrite(6,LOW);
+      digitalWrite(7,LOW);
+      digitalWrite(8,HIGH);
+      delay(390);
+     }else if (command == "stop"){
+      digitalWrite(5,LOW);
+      digitalWrite(6,LOW);
+      digitalWrite(7,LOW);
+      digitalWrite(8,LOW);
+     }
+  }
+}
